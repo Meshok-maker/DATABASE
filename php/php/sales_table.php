@@ -24,7 +24,7 @@ include '../html/Header.html';
 </div>
 <div class="m-2 tableSelectContainer">
 <h3 align="center">Таблица продаж</h3>
-<form action="queryHandler.php" method="post">
+<form action="Handlers/sales.php" method="post">
     <table class = "table">
         <tr>
             <th>Выбор</th>
@@ -50,26 +50,24 @@ include '../html/Header.html';
     <div class="m-3 p-1 workdbdiv">
         <h5 class="m-2"> Добавление, изменение и удаление данных в БД</h5>
         <div style="display: flex; flex-direction: column;">
-            <input type ="hidden" name="table" value="city">
+            <input type ="hidden" name="table" value="sales">
             <p>
                 Дата продажи
                 <input type="date" name="sale_date">
             </p>
             <p>
-                Фамилия
-                <input type="text" name="surname">
-            </p>
-            <p>
-                Имя
-                <input type="text" name="first_name">
-            </p>
-            <p>
-                Отчество
-                <input type="text" name="middle_name">
+                Клиент
+                <select name="client_id">
+                    <?php
+                    foreach ($pdo->query("SELECT id, surname,first_name,middle_name FROM clients order by id;")as $row){
+                        echo "<option value='{$row['id']}'>{$row['id']} - {$row['surname']} {$row['first_name']} {$row['middle_name']}</option>>";
+                    }
+                    ?>
+                </select>
             </p>
             <p>
                 id Тура
-                <select name="country_id">
+                <select name="tour_id">
                     <?php
                     foreach ($pdo->query("SELECT id FROM tours order by id;")as $row){
                         echo "<option value='{$row['id']}'>{$row['id']}</option>>";

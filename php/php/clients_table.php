@@ -24,7 +24,7 @@ include '../html/Header.html';
 </div>
 <div class="m-2 tableSelectContainer">
 <h3 align="center">Таблица Клиентов</h3>
-<form action="queryHandler.php" method="post">
+<form action="Handlers/client.php" method="post">
     <table class = "table">
         <tr>
             <th>Выбор</th>
