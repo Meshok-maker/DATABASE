@@ -7,7 +7,7 @@ include '../html/Header.html';
 
 <script>
     function update(id) {
-        return update_values(`http://${current_host}/php/api/get_hotels_by_id.php?id=${id}`);
+        return update_values(`${location.protocol}//${current_host}/php/api/get_hotels_by_id.php?id=${id}`);
     }
 </script>
 
