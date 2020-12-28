@@ -2,26 +2,15 @@
 require 'home.php';
 include '../html/Header.html';
 ?>
-<div class="formSelTab m-2 tableSelectContainer">
-    <form method="post" action="clients_table.php">
-        <button value="clients" class="m-2 btn btn-light">Клиенты</button>
-    </form>
-    <form method="post" action="country_table.php">
-        <button value="country" class="m-2 btn btn-light">Страны</button>
-    </form>
-    <form method="post" action="city_table.php">
-        <button value="city" class="m-2 btn btn-light">Города</button>
-    </form>
-    <form method="post" action="hotels_table.php">
-        <button value="hotels" class="m-2 btn btn-outline-light">Отели</button>
-    </form>
-    <form method="post" action="tour_table.php">
-        <button value="tours" class="m-2 btn btn-light">Туры</button>
-    </form>
-    <form method="post" action="sales_table.php">
-        <button value="sales" class="m-2 btn btn-light">Продажи</button>
-    </form>
-</div>
+
+<script src="app.js"></script>
+
+<script>
+    function update(id) {
+        return update_values(`http://${current_host}/php/api/get_hotels_by_id.php?id=${id}`);
+    }
+</script>
+
 <div class="m-2 tableSelectContainer">
 <h3 align="center">Таблица отелей</h3>
 <form action="Handlers/hotels.php" method="post">
@@ -38,7 +27,7 @@ include '../html/Header.html';
         <?
         foreach ($pdo->query("SELECT hotels.id hotels_pk,hotel_name,raiting,price,host_city,city_name FROM hotels join city c on c.id = hotels.host_city;") as $row) {
             echo "<tr>
-<th><input type='radio' name='selected' value='{$row['hotels_pk']}'></th>
+<th><input type='radio' name='selected' value='{$row['hotels_pk']}' onchange='update(this.value)'></th>
             <th>{$row['hotels_pk']}</th>
             <th>{$row['hotel_name']}</th>
             <th>{$row['raiting']}</th>
@@ -55,15 +44,15 @@ include '../html/Header.html';
             <input type ="hidden" name="table" value="hotels">
             <p>
                 Название отеля
-                <input type="text" name="hotel_name">
+                <input type="text" name="hotel_name" id="hotel_name">
             </p>
             <p>
                 Рейтинг
-                <input type="number" name="raiting" min="1" max="5">
+                <input type="number" name="raiting" min="1" max="5" id="raiting">
             </p>
             <p>
                 Расположение отеля
-                <select name="host_city">
+                <select name="host_city" id="host_city">
                     <?php
                     foreach ($pdo->query("SELECT * FROM city;")as $row){
                         echo "<option value='{$row['id']}'>{$row['id']}:{$row['city_name']} </option>>";
@@ -73,7 +62,7 @@ include '../html/Header.html';
             </p>
             <p>
                 Цена
-                <input type="number" name="price" min="0">
+                <input type="number" name="price" min="0" id="price">
             </p>
             <div>
                 <button type="submit" name="add" class="m-2 btn btn-light">Добавить</button>

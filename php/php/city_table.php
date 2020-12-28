@@ -2,26 +2,14 @@
 require 'home.php';
 include '../html/Header.html';
 ?>
-<div class="formSelTab m-2 tableSelectContainer">
-    <form method="post" action="clients_table.php">
-        <button value="clients" class="m-2 btn btn-light">Клиенты</button>
-    </form>
-    <form method="post" action="country_table.php">
-        <button value="country" class="m-2 btn btn-light">Страны</button>
-    </form>
-    <form method="post" action="city_table.php">
-        <button value="city" class="m-2 btn btn-outline-light">Города</button>
-    </form>
-    <form method="post" action="hotels_table.php">
-        <button value="hotels" class="m-2 btn btn-light">Отели</button>
-    </form>
-    <form method="post" action="tour_table.php">
-        <button value="tours" class="m-2 btn btn-light">Туры</button>
-    </form>
-    <form method="post" action="sales_table.php">
-        <button value="sales" class="m-2 btn btn-light">Продажи</button>
-    </form>
-</div>
+
+<script src="app.js"></script>
+
+<script>
+    function update(id) {
+        return update_values(`http://${current_host}/php/api/get_city_by_id.php?id=${id}`);
+    }
+</script>
 
 <div class="m-2 tableSelectContainer">
     <h3 align="center">Таблица городов</h3>
@@ -38,7 +26,7 @@ include '../html/Header.html';
         <?
         foreach ($pdo->query("SELECT city.id city_pk, city_name,country_id,country_name FROM city join country c on c.id = city.country_id;") as $row) {
             echo "<tr>
-<th><input type='radio' name='selected' value='{$row['city_pk']}'></th>
+<th><input type='radio' name='selected' value='{$row['city_pk']}' onchange='update(this.value)'></th>
             <th>{$row['city_pk']}</th>
             <th>{$row['city_name']}</th>
             <th>{$row['country_id']}</th>
@@ -53,11 +41,11 @@ include '../html/Header.html';
             <input type ="hidden" name="table" value="city">
             <p>
                 Название города
-               <input type="text" name="city_name">
+               <input type="text" name="city_name" id="city_name">
             </p>
             <p>
                 Название страны
-                <select name="country_id">
+                <select name="country_id" id="country_id">
                 <?php
                 foreach ($pdo->query("SELECT * FROM country;")as $row){
                     echo "<option value='{$row['id']}'>{$row['id']}:{$row['country_name']} </option>>";

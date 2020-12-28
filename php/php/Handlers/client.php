@@ -65,7 +65,7 @@ if(!empty($_POST)) {
     if(isset($_POST['edit'])) {
         $sql = "UPDATE clients SET first_name = :first_name, surname = :surname, middle_name = :middle_name, dob = :dob, adress = :adress, telephone = :telephone, visa = :visa   WHERE id='{$_POST['selected']}'";
         $queryEdit= $pdo->prepare($sql);
-        $value = array(':first_name'=>$_POST['first_name'], ':second_name'=>$_POST['second_name'], ':DOB'=>$_POST['DOB']);
+        $value = array(':first_name'=>$_POST['first_name'], ':surname'=>$_POST['surname'], ':middle_name'=>$_POST['middle_name'], ':dob'=>$_POST['dob'], ':adress'=>$_POST['adress'],':telephone'=>$_POST['telephone'],':visa'=>$_POST['visa'] );
         if($queryEdit->execute($value)) {
             echo "
             <div class='alert alert-primary m-3' role='alert'>

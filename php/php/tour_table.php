@@ -2,26 +2,16 @@
 require 'home.php';
 include '../html/Header.html';
 ?>
-<div class="formSelTab m-2 tableSelectContainer">
-    <form method="post" action="clients_table.php">
-        <button value="clients" class="m-2 btn btn-light">Клиенты</button>
-    </form>
-    <form method="post" action="country_table.php">
-        <button value="country" class="m-2 btn btn-light">Страны</button>
-    </form>
-    <form method="post" action="city_table.php">
-        <button value="city" class="m-2 btn btn-light">Города</button>
-    </form>
-    <form method="post" action="hotels_table.php">
-        <button value="hotels" class="m-2 btn btn-light">Отели</button>
-    </form>
-    <form method="post" action="tour_table.php">
-        <button value="tours" class="m-2 btn btn-outline-light">Туры</button>
-    </form>
-    <form method="post" action="sales_table.php">
-        <button value="sales" class="m-2 btn btn-light">Продажи</button>
-    </form>
-</div>
+
+<script src="app.js"></script>
+
+<script>
+    function update(id) {
+        return update_values(`http://${current_host}/php/api/get_tours_by_id.php?id=${id}`);
+    }
+</script>
+
+
 <div class="m-2 tableSelectContainer">
 <h3 align="center">Таблица туров</h3>
 <form action="Handlers/tours.php" method="post">
@@ -41,7 +31,7 @@ include '../html/Header.html';
     <?
     foreach ($pdo->query("SELECT * FROM tours;") as $row) {
         echo "<tr>
-<th><input type='radio' name='selected' value='{$row['id']}'></th>
+<th><input type='radio' name='selected' value='{$row['id']}' onchange='update(this.value)'></th>
             <th>{$row['id']}</th>
             <th>{$row['type_tour']}</th>
             <th>{$row['type_food']}</th>
@@ -60,7 +50,7 @@ include '../html/Header.html';
         <input type ="hidden" name="table" value="tours">
         <p>
             Тип тура
-            <select name="type_tour">
+            <select name="type_tour" id="type_tour">
                 <option value="Auto tour">Auto tour</option>
                 <option value="Cruise">Cruise</option>
                 <option value="Mountain">Mountain</option>
@@ -72,7 +62,7 @@ include '../html/Header.html';
         </p>
         <p>
             Тип питания
-            <select name="type_food">
+            <select name="type_food" id="type_food">
                 <option value="Breakfast only">Breakfast only</option>
                 <option value="Breakfast and lunch">Breakfast and lunch</option>
                 <option value="All inclusive">All inclusive</option>
@@ -80,23 +70,23 @@ include '../html/Header.html';
         </p>
         <p>
             Отель
-            <input type="text" name="hotel">
+            <input type="text" name="hotel" id="hotel">
         </p>
         <p>
             Начало тура
-            <input type="date" name="begin_date">
+            <input type="date" name="begin_date" id="begin_date">
         </p>
         <p>
             Конец тура
-            <input type="date" name="end_date">
+            <input type="date" name="end_date" id="end_date">
         </p>
         <p>
             Требование визы
-            <input type="number" name="is_needed_visa" value="1" min="0" max="1">
+            <input type="number" name="is_needed_visa" value="1" min="0" max="1" id="is_needed_visa">
         </p>
         <p>
             Цена
-            <input type="number" name="price" min="0">
+            <input type="number" name="price" min="0" id="price">
         </p>
         <div>
             <button type="submit" name="add" class="m-2 btn btn-light">Добавить</button>

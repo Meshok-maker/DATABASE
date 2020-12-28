@@ -2,26 +2,15 @@
 require 'home.php';
 include '../html/Header.html';
 ?>
-<div class="formSelTab m-2 tableSelectContainer">
-    <form method="post" action="clients_table.php">
-        <button value="clients" class="m-2 btn btn-outline-light">Клиенты</button>
-    </form>
-    <form method="post" action="country_table.php">
-        <button value="country" class="m-2 btn btn-light">Страны</button>
-    </form>
-    <form method="post" action="city_table.php">
-        <button value="city" class="m-2 btn btn-light">Города</button>
-    </form>
-    <form method="post" action="hotels_table.php">
-        <button value="hotels" class="m-2 btn btn-light">Отели</button>
-    </form>
-    <form method="post" action="tour_table.php">
-        <button value="tours" class="m-2 btn btn-light">Туры</button>
-    </form>
-    <form method="post" action="sales_table.php">
-        <button value="sales" class="m-2 btn btn-light">Продажи</button>
-    </form>
-</div>
+
+<script src="app.js"></script>
+
+<script>
+    function update(id) {
+        return update_values(`http://${current_host}/php/api/get_clients_by_id.php?id=${id}`);
+    }
+</script>
+
 <div class="m-2 tableSelectContainer">
 <h3 align="center">Таблица Клиентов</h3>
 <form action="Handlers/client.php" method="post">
@@ -41,7 +30,7 @@ include '../html/Header.html';
         <?
         foreach ($pdo->query("SELECT * FROM clients;") as $row) {
             echo "<tr>
-<th><input type='radio' name='selected' value='{$row['id']}'></th>
+<th><input type='radio' name='selected' value='{$row['id']}' onchange='update(this.value)'></th>
             <th>{$row['id']}</th>
             <th>{$row['surname']}</th>
             <th>{$row['first_name']}</th>
@@ -60,31 +49,31 @@ include '../html/Header.html';
             <input type ="hidden" name="table" value="clients">
             <p>
                 Фамилия
-               <input type="text" name="surname">
+               <input type="text" name="surname" id="surname">
             </p>
             <p>
                 Имя
-                <input type="text" name="first_name">
+                <input type="text" name="first_name" id="first_name">
             </p>
             <p>
                 Отчество
-                <input type="text" name="middle_name">
+                <input type="text" name="middle_name" id="middle_name">
             </p>
             <p>
                 Дата рождения
-                <input type="date" name="dob">
+                <input type="date" name="dob" id="dob">
             </p>
             <p>
                 Адрес
-                <input type="text" name="adress">
+                <input type="text" name="adress" id="adress">
             </p>
             <p>
                 Телефон
-                <input type="text" name="telephone">
+                <input type="text" name="telephone" id="telephone">
             </p>
             <p>
                 Окончание визы
-                <input type="date" name="visa">
+                <input type="date" name="visa" id="visa">
             </p>
             <div>
                 <button type="submit" name="add" class="m-2 btn btn-light">Добавить</button>

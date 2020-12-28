@@ -2,7 +2,6 @@
 require '../home.php';
 include '../../html/Header.html';
 
-print_r($_POST);
 
 if(!empty($_POST)) {
     if(isset($_POST['add'])) {

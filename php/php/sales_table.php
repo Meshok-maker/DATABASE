@@ -2,26 +2,15 @@
 require 'home.php';
 include '../html/Header.html';
 ?>
-<div class="formSelTab m-2 tableSelectContainer">
-    <form method="post" action="clients_table.php">
-        <button value="clients" class="m-2 btn btn-light">Клиенты</button>
-    </form>
-    <form method="post" action="country_table.php">
-        <button value="country" class="m-2 btn btn-light">Страны</button>
-    </form>
-    <form method="post" action="city_table.php">
-        <button value="city" class="m-2 btn btn-light">Города</button>
-    </form>
-    <form method="post" action="hotels_table.php">
-        <button value="hotels" class="m-2 btn btn-light">Отели</button>
-    </form>
-    <form method="post" action="tour_table.php">
-        <button value="tours" class="m-2 btn btn-light">Туры</button>
-    </form>
-    <form method="post" action="sales_table.php">
-        <button value="sales" class="m-2 btn btn-outline-light">Продажи</button>
-    </form>
-</div>
+
+<script src="app.js"></script>
+
+<script>
+    function update(id) {
+        return update_values(`http://${current_host}/php/api/get_sales_by_id.php?id=${id}`);
+    }
+</script>
+
 <div class="m-2 tableSelectContainer">
 <h3 align="center">Таблица продаж</h3>
 <form action="Handlers/sales.php" method="post">
@@ -38,7 +27,7 @@ include '../html/Header.html';
         foreach ($pdo->query("SELECT sales.id sales_pk, sale_date, surname,first_name,middle_name, tour_id  FROM sales join clients c on c.id = sales.client_id") as $row) {
             $fio= "{$row['surname']} {$row['first_name']} {$row['middle_name']}";
             echo "<tr>
-<th><input type='radio' name='selected' value='{$row['sales_pk']}'></th>
+<th><input type='radio' name='selected' value='{$row['sales_pk']}'onchange='update(this.value)'></th>
             <th>{$row['sales_pk']}</th>
             <th>{$row['sale_date']}</th>
             <th>{$fio}</th>
@@ -53,11 +42,11 @@ include '../html/Header.html';
             <input type ="hidden" name="table" value="sales">
             <p>
                 Дата продажи
-                <input type="date" name="sale_date">
+                <input type="date" name="sale_date" id="sale_date">
             </p>
             <p>
                 Клиент
-                <select name="client_id">
+                <select name="client_id" id="client_id">
                     <?php
                     foreach ($pdo->query("SELECT id, surname,first_name,middle_name FROM clients order by id;")as $row){
                         echo "<option value='{$row['id']}'>{$row['id']} - {$row['surname']} {$row['first_name']} {$row['middle_name']}</option>>";
@@ -67,7 +56,7 @@ include '../html/Header.html';
             </p>
             <p>
                 id Тура
-                <select name="tour_id">
+                <select name="tour_id" id="tour_id">
                     <?php
                     foreach ($pdo->query("SELECT id FROM tours order by id;")as $row){
                         echo "<option value='{$row['id']}'>{$row['id']}</option>>";
