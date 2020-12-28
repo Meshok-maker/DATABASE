@@ -1,63 +1,86 @@
-CREATE DATABASE IF NOT EXISTS travel_agency_db;
-USE travel_agency_db;
-
-CREATE TABLE IF NOT EXISTS clients
+create table clients
 (
-    clients_id  BIGINT PRIMARY KEY AUTO_INCREMENT,
-    surname     VARCHAR(255) NOT NULL,
-    first_name  VARCHAR(255) NOT NULL,
-    middle_name VARCHAR(255) NOT NULL,
-    dob         DATE         NOT NULL,
-    adress      VARCHAR(255) NOT NULL,
-    telephone   VARCHAR(255) NOT NULL,
-    visa        DATE
+    id          bigint auto_increment
+        primary key,
+    surname     varchar(255) not null,
+    first_name  varchar(255) not null,
+    middle_name varchar(255) not null,
+    dob         date         not null,
+    adress      varchar(255) not null,
+    telephone   varchar(255) not null,
+    visa        date         null
 );
 
-CREATE TABLE IF NOT EXISTS country
+create table country
 (
-    country_id   BIGINT PRIMARY KEY AUTO_INCREMENT,
-    country_name VARCHAR(255) NOT NULL
+    id           bigint auto_increment
+        primary key,
+    country_name varchar(255) not null,
+    constraint country_country_name_uindex
+        unique (country_name)
 );
 
-CREATE TABLE IF NOT EXISTS city
+create table city
 (
-    city_id    BIGINT PRIMARY KEY AUTO_INCREMENT,
-    country_id BIGINT       NOT NULL,
-    city_name  VARCHAR(255) NOT NULL,
-    FOREIGN KEY (country_id) REFERENCES country (id)
+    id         bigint auto_increment
+        primary key,
+    country_id bigint       not null,
+    city_name  varchar(255) not null,
+    constraint city_ibfk_1
+        foreign key (country_id) references country (id)
 );
 
-CREATE TABLE IF NOT EXISTS hotels
+create index country_id
+    on city (country_id);
+
+create table hotels
 (
-    hotels_id          BIGINT PRIMARY KEY AUTO_INCREMENT,
-    host_city          BIGINT       NOT NULL,
-    accommodation_type ENUM ('accommodation is not included','single','double','family'),
-    hotel_name         VARCHAR(255) NOT NULL,
-    raiting            INT          NOT NULL,
-    FOREIGN KEY (host_city) REFERENCES city (id),
-    price              BIGINT       NOT NULL
+    id         bigint auto_increment
+        primary key,
+    host_city  bigint       not null,
+    hotel_name varchar(255) not null,
+    raiting    int          not null,
+    price      bigint       not null,
+    constraint hotels_ibfk_1
+        foreign key (host_city) references city (id)
 );
 
-CREATE TABLE IF NOT EXISTS tours
+create index host_city
+    on hotels (host_city);
+
+create table tours
 (
-    tour_id        BIGINT PRIMARY KEY AUTO_INCREMENT,
-    type_tour      ENUM ('Auto tour','Cruise','Mountain','Exotic','Healing','Excursion','Business'),
-    type_food      ENUM ('Breakfast only', 'Breakfast and lunch', 'All inclusive'),
-    hotel          BIGINT NOT NULL,
-    begin_date     DATE   NOT NULL,
-    end_date       DATE   NOT NULL,
-    is_needed_visa BOOLEAN DEFAULT (FALSE),
-    price          BIGINT NOT NULL,
-    FOREIGN KEY (hotel) REFERENCES hotels (id)
+    id             bigint auto_increment
+        primary key,
+    type_tour      enum ('Auto tour', 'Cruise', 'Mountain', 'Exotic', 'Healing', 'Excursion', 'Business') null,
+    type_food      enum ('Breakfast only', 'Breakfast and lunch', 'All inclusive')                        null,
+    hotel          bigint                                                                                 not null,
+    begin_date     date                                                                                   not null,
+    end_date       date                                                                                   not null,
+    is_needed_visa tinyint(1) default false                                                               null,
+    price          bigint                                                                                 not null,
+    constraint tours_ibfk_1
+        foreign key (hotel) references hotels (id)
 );
 
-CREATE TABLE IF NOT EXISTS sales
+create table sales
 (
-    sales_id  BIGINT PRIMARY KEY AUTO_INCREMENT,
-    client_id BIGINT NOT NULL,
-    tour_id   BIGINT NOT NULL,
-    FOREIGN KEY (client_id) REFERENCES clients (id),
-    sale_date DATE   NOT NULL,
-    FOREIGN KEY (tour_id) REFERENCES tours (id)
+    id        bigint auto_increment
+        primary key,
+    client_id bigint not null,
+    tour_id   bigint not null,
+    sale_date date   not null,
+    constraint sales_ibfk_1
+        foreign key (client_id) references clients (id),
+    constraint sales_ibfk_2
+        foreign key (tour_id) references tours (id)
 );
 
+create index client_id
+    on sales (client_id);
+
+create index tour_id
+    on sales (tour_id);
+
+create index hotel
+    on tours (hotel);
