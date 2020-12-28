@@ -1,0 +1,17 @@
+INSERT INTO travel_agency_db.country (id, country_name) VALUES (16, 'Australia');
+INSERT INTO travel_agency_db.country (id, country_name) VALUES (11, 'Belarus');
+INSERT INTO travel_agency_db.country (id, country_name) VALUES (14, 'Belgium');
+INSERT INTO travel_agency_db.country (id, country_name) VALUES (17, 'Canada');
+INSERT INTO travel_agency_db.country (id, country_name) VALUES (6, 'China');
+INSERT INTO travel_agency_db.country (id, country_name) VALUES (3, 'Finland');
+INSERT INTO travel_agency_db.country (id, country_name) VALUES (4, 'France');
+INSERT INTO travel_agency_db.country (id, country_name) VALUES (5, 'Germany');
+INSERT INTO travel_agency_db.country (id, country_name) VALUES (8, 'Italy');
+INSERT INTO travel_agency_db.country (id, country_name) VALUES (7, 'Japan');
+INSERT INTO travel_agency_db.country (id, country_name) VALUES (1, 'Russia');
+INSERT INTO travel_agency_db.country (id, country_name) VALUES (13, 'South Korea');
+INSERT INTO travel_agency_db.country (id, country_name) VALUES (9, 'Spain');
+INSERT INTO travel_agency_db.country (id, country_name) VALUES (15, 'Sweden');
+INSERT INTO travel_agency_db.country (id, country_name) VALUES (18, 'UK');
+INSERT INTO travel_agency_db.country (id, country_name) VALUES (10, 'Ukraine');
+INSERT INTO travel_agency_db.country (id, country_name) VALUES (2, 'USA');

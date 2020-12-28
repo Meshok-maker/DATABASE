@@ -1,0 +1,7 @@
+INSERT INTO travel_agency_db.tours (id, type_tour, type_food, hotel, begin_date, end_date, is_needed_visa, price) VALUES (1, 'Auto tour', 'Breakfast and lunch', 1, '2020-12-01', '2020-12-08', 0, 15000);
+INSERT INTO travel_agency_db.tours (id, type_tour, type_food, hotel, begin_date, end_date, is_needed_visa, price) VALUES (2, 'Cruise', 'Breakfast and lunch', 7, '2021-07-15', '2021-07-22', 1, 25000);
+INSERT INTO travel_agency_db.tours (id, type_tour, type_food, hotel, begin_date, end_date, is_needed_visa, price) VALUES (3, 'Mountain', 'All inclusive', 2, '2020-12-30', '2021-01-06', 1, 35000);
+INSERT INTO travel_agency_db.tours (id, type_tour, type_food, hotel, begin_date, end_date, is_needed_visa, price) VALUES (4, 'Healing', 'All inclusive', 5, '2021-04-12', '2021-04-22', 1, 10000);
+INSERT INTO travel_agency_db.tours (id, type_tour, type_food, hotel, begin_date, end_date, is_needed_visa, price) VALUES (5, 'Business', 'Breakfast only', 4, '2021-06-01', '2021-06-23', 1, 48321);
+INSERT INTO travel_agency_db.tours (id, type_tour, type_food, hotel, begin_date, end_date, is_needed_visa, price) VALUES (6, 'Exotic', 'All inclusive', 5, '2021-03-14', '2021-03-21', 1, 55000);
+INSERT INTO travel_agency_db.tours (id, type_tour, type_food, hotel, begin_date, end_date, is_needed_visa, price) VALUES (7, 'Excursion', 'All inclusive', 5, '2021-03-15', '2022-04-22', 0, 61000);
