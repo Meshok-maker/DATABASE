@@ -148,25 +148,11 @@ require 'home.php';
                 </div>
 
                 <div class="row">
-                    <form method="POST" action="queries/tours_with_certain_accommodation_price_rating.php">
-                        <h6 class="m-1">10) Вывести отели с определенным типом размещения, определенной ценой и
-                            определенным рейтингом:
-                            <select name="accommodation_type">
-                                <option value="accommodation is not included">Accommodation is not included</option>
-                                <option value="single">Single</option>
-                                <option value="double">Double</option>
-                                <option value="family">Family</option>
-                            </select>
-                            <input type="number" name="price" min="0">
-                            <input type="number" name="rating" min="1" max="5">
-                            <button type="submit" class="m-2 btn btn-outline-dark">Выполнить</button>
-                        </h6>
-                    </form>
                 </div>
 
                 <div class="row">
                     <form method="POST" action="queries/clients_who_bought_ticket_on_certain_date.php">
-                        <h6 class="m-1">11) Вывести клиентов, которые купили билеты в определенную дату:
+                        <h6 class="m-1">10) Вывести клиентов, которые купили билеты в определенную дату:
                             <input type="date" name="buy_tickets_date">
                             <button type="submit" class="m-2 btn btn-outline-dark">Выполнить</button>
                         </h6>
@@ -175,7 +161,7 @@ require 'home.php';
 
                 <div class="row">
                     <form method="POST" action="queries/average_age_of_clients.php">
-                        <h6 class="m-1">12) Вывести средний возраст клиентов:
+                        <h6 class="m-1">11) Вывести средний возраст клиентов:
                             <button type="submit" class="m-2 btn btn-outline-dark">Выполнить</button>
                         </h6>
                     </form>
@@ -183,7 +169,7 @@ require 'home.php';
 
                 <div class="row">
                     <form method="POST" action="queries/revenue_in_certain_period.php">
-                        <h6 class="m-1">13) Вывести выручку c
+                        <h6 class="m-1">12) Вывести выручку c
                             <input type="date" name="initial_revenue_term">
                             по
                             <input type="date" name="earnings_deadline">

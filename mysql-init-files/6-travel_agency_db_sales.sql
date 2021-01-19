@@ -9,3 +9,7 @@ INSERT INTO travel_agency_db.sales (id, client_id, tour_id, sale_date) VALUES (9
 INSERT INTO travel_agency_db.sales (id, client_id, tour_id, sale_date) VALUES (10, 5, 6, '2021-02-14');
 INSERT INTO travel_agency_db.sales (id, client_id, tour_id, sale_date) VALUES (11, 6, 2, '2021-02-14');
 INSERT INTO travel_agency_db.sales (id, client_id, tour_id, sale_date) VALUES (12, 7, 3, '2020-10-05');
+INSERT INTO travel_agency_db.sales (id, client_id, tour_id, sale_date) VALUES (13, 6, 7, '2021-03-01');
+INSERT INTO travel_agency_db.sales (id, client_id, tour_id, sale_date) VALUES (14, 7, 4, '2021-03-21');
+INSERT INTO travel_agency_db.sales (id, client_id, tour_id, sale_date) VALUES (15, 4, 1, '2020-11-21');
+INSERT INTO travel_agency_db.sales (id, client_id, tour_id, sale_date) VALUES (16, 4, 3, '2020-12-15');
