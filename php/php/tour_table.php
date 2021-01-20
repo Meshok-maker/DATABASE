@@ -29,17 +29,18 @@ include '../html/Header.html';
     </tr>
 
     <?
-    foreach ($pdo->query("SELECT * FROM tours;") as $row) {
+    foreach ($pdo->query("SELECT tours.id tours_id, type_tour, type_food, hotel_name, begin_date, end_date, is_needed_visa, tours.price tours_price FROM tours join hotels h on h.id = tours.hotel;") as $row) {
+        $is_visa_needed = $row['is_needed_visa']?'да':'нет';
         echo "<tr>
-<th><input type='radio' name='selected' value='{$row['id']}' onchange='update(this.value)'></th>
-            <th>{$row['id']}</th>
+<th><input type='radio' name='selected' value='{$row['tours_id']}' onchange='update(this.value)'></th>
+            <th>{$row['tours_id']}</th>
             <th>{$row['type_tour']}</th>
             <th>{$row['type_food']}</th>
-            <th>{$row['hotel']}</th>
+            <th>{$row['hotel_name']}</th>
             <th>{$row['begin_date']}</th>
             <th>{$row['end_date']}</th>
-            <th>{$row['is_needed_visa']}</th>
-            <th>{$row['price']}</th>
+            <th>{$is_visa_needed}</th>
+            <th>{$row['tours_price']}</th>
             </tr>";
     }
     ?>
@@ -70,7 +71,14 @@ include '../html/Header.html';
         </p>
         <p>
             Отель
-            <input type="text" name="hotel" id="hotel">
+            <select name="hotel" id="hotel">
+                <?php
+                foreach ($pdo->query("SELECT * FROM hotels;") as $row) {
+                    echo "<option value={$row['id']}>{$row['hotel_name']}</option>";
+                }
+                ?>
+
+            </select>
         </p>
         <p>
             Начало тура
@@ -82,7 +90,10 @@ include '../html/Header.html';
         </p>
         <p>
             Требование визы
-            <input type="number" name="is_needed_visa" value="1" min="0" max="1" id="is_needed_visa">
+            <select name="is_needed_visa" id="is_needed_visa">
+                <option value="0">нет</option>
+                <option value="1">да</option>
+            </select>
         </p>
         <p>
             Цена

@@ -178,6 +178,22 @@ require 'home.php';
                     </form>
                 </div>
 
+                <div class="row">
+                    <form method="POST" action="queries/Most_popular_tours.php">
+                        <h6 class="m-1">13) Вывести самый популярный тур
+                            <button type="submit" class="m-2 btn btn-outline-dark">Выполнить</button>
+                        </h6>
+                    </form>
+                </div>
+
+                <div class="row">
+                    <form method="POST" action="queries/Which_countries_have_the_most_hotels.php">
+                        <h6 class="m-1">14) Количество отелей по странам
+                            <button type="submit" class="m-2 btn btn-outline-dark">Выполнить</button>
+                        </h6>
+                    </form>
+                </div>
+
             </div>
         </div>
     </div>
