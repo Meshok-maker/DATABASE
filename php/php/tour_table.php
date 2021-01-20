@@ -29,7 +29,7 @@ include '../html/Header.html';
     </tr>
 
     <?
-    foreach ($pdo->query("SELECT tours.id tours_id, type_tour, type_food, hotel_name, begin_date, end_date, is_needed_visa, tours.price tours_price FROM tours join hotels h on h.id = tours.hotel;") as $row) {
+    foreach ($pdo->query("SELECT tours.id tours_id, type_tour, type_food, hotel_name, begin_date, end_date, is_needed_visa, tours.price tours_price FROM tours join hotels h on h.id = tours.hotel order by tours_id;") as $row) {
         $is_visa_needed = $row['is_needed_visa']?'да':'нет';
         echo "<tr>
 <th><input type='radio' name='selected' value='{$row['tours_id']}' onchange='update(this.value)'></th>
